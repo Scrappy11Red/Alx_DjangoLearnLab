@@ -1,5 +1,7 @@
 from bookshelf.models import Book
 //Updates book title.
-updated_book = Book.objects.filter(title = "1984").update(title = "Nineteen Eighty-Four")
+book = Book.objects.get(title = "1984")
+book.title = "Nineteen Eighty-Four"
+book.save()
 // Prints expected output showing the updated title.
-print(updated_book)
+print(retrieve_book)
