@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 def book_list(request):
     books = Book.objects.all()
 
-    return render(request, 'books/book_list.html', {'book':books})
+    return render(request, 'books/list_books.html', {'book':books})
 
 class LibraryDetailView(DetailView):
     model = Library
