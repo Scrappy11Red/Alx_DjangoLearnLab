@@ -2,7 +2,7 @@ from django.shortcuts import render
 from typing import Any
 
 # Create your views here.
-from  .models import Book, Library
+from  .models import Library
 from django.views.generic import DetailView
 
 
