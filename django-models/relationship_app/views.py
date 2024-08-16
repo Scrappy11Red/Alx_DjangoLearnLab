@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from typing import Any
-
-# Create your views here.
-from  .models import Library
+from .models import Library, Book
 from django.views.generic import DetailView
 
 
@@ -13,7 +11,7 @@ def book_list(request):
 
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = "relationship_app/list_books.html", "from .models import Library"
+    template_name = "relationship_app/list_books.html"
     context_object_name = 'library'
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
