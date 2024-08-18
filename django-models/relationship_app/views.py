@@ -8,6 +8,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import *
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login
+from django.contrib.auth import logout
 
 def list_books(request):
     books = Book.objects.all()
@@ -24,10 +27,15 @@ class LibraryDetailView(DetailView):
         context['books'] = self.object.book_set.all()
         return context
     
-class SignUpView(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            login(request, form.save())
+            return redirect("home")
+    else:
+        form = UserCreationForm()
+    return render(request, "relationship_app/register.html", {"form": form})
 
 
 def LoginView(request):
