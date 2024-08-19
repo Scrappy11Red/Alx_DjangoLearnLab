@@ -13,6 +13,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
+from .models import UserProfile
 
 def list_books(request):
     books = Book.objects.all()
