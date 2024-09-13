@@ -16,9 +16,9 @@ class BookListView(generics.ListView):
     serializer_class = BookSerializer
     #Applies Django REST Framework’s permission classes to protect API endpoint based on user roles.
     permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['title', 'author_name', 'publication_year']
-    search_fields = ['title', 'author_name']
+    filter_backends = [filters.OrderingFilter]
+    filterset_fields = ['title', 'author', 'publication_year']
+    search_fields = ['title', 'author']
     ordering_fields = ['title', 'publication_year']
 
     def perform_create(self, serializer):
