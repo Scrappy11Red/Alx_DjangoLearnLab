@@ -2,6 +2,7 @@ from .models import Book, Author
 from django.urls import path
 from . import views
 
+#Configures URL patterns to connect the aforementioned views in views.py with specific endpoints.
 ulrpatterns = [
     path('books/', views.BookLlistView.as_view(), name='book-list'),
     path('books/create/', views.BookListCreateView.as_view(), name='book-list-create'),
