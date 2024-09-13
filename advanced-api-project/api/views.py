@@ -5,7 +5,7 @@ from rest_framework import generics, permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 # Create your views here.
-class BookListCreateView(generics.ListView):
+class BookListView(generics.ListView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -18,17 +18,23 @@ class BookListDetailView(generics.DetailView):
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BookListCreateView(generics.CreateView):
+class BookListCreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BookListUpdateView(generics.UpdateView):
+    def create_book(self, serializer):
+        serializer.save(creator=self.request.user)
+
+class BookListUpdateView(generics.UpdateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BookListDeleteView(generics.DeleteView):
+class BookListDeleteView(generics.DestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class BookRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
