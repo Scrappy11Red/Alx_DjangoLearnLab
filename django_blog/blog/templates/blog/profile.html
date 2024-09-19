@@ -1,0 +1,7 @@
+<h2>Profile</h2>
+<form method="post">
+    {% csfr_token %}
+    <label type="email">Email:</label>
+    <input type="email" name="email" value="{{ user.email }}">
+    <button type="submit">Update Profile</button>
+</form>
