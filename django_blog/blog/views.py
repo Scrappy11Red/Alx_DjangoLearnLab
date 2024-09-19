@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, PostForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 
 # Create your views here.
@@ -59,3 +60,4 @@ class PostDeleteView(DeleteView):
     template_name = 'blog/post_delete.html'
     model = Post
     success_url = '/'
+
