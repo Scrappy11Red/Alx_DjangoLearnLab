@@ -1,8 +1,11 @@
+from typing import Any
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import UserRegisterForm, PostForm
 from django.contrib.auth.models import User
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Post
 
 # Create your views here.
 
@@ -26,3 +29,33 @@ def profile(request):
         user.save()
         return redirect('profile')
     return render(request, 'blog/profile.html', {'user': request.user})
+
+
+
+class PostCreateView(CreateView):
+    template_name = 'blog/post_create.html'
+    model = Post
+    success_url = '/'
+    fields = ['title', 'content']
+
+class PostListView(ListView):
+    template_name = 'blog/post_list.html'
+    models = Post
+    queryset = Post.objects.all()
+    templates_name = 'blog/post_list.html'
+    
+class PostDetailView(DeleteView):
+    model = Post
+    context_object_name = 'post'
+    template_name = 'blog/post_detail.html'
+    
+
+class PostUpdateView(UpdateView):
+    template_name = 'blog/post_update.html'
+    model = Post
+    success_url = '/'
+    
+class PostDeleteView(DeleteView):
+    template_name = 'blog/post_delete.html'
+    model = Post
+    success_url = '/'
