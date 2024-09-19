@@ -27,3 +27,16 @@ def update_user_profile(request):
         else:
             form = UserUpdateForm(instance=request.user)
         return render(request, 'blog/update.html', {'form': form})
+    
+
+def user_login(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        redirect("/")
+    else:
+        # Return an 'invalid login' error message.
+        ...
