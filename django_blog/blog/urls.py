@@ -8,7 +8,7 @@ urlpatterns = [
     path("profile/", profile, name=profile),
     path("", PostListView, name=PostListView),
     path("post_list/<int:pk>/", PostDetailView, name=PostDetailView),
-    path("post/<int:pk>/post_update/", PostUpdateView, name=PostUpdateView),
-    path("post/<int:pk>/post_delete/", PostDeleteView, name=PostDeleteView),
-    path("post_create/", PostCreateView, name=PostCreateView),
+    path("post/<int:pk>/update/", PostUpdateView, name=PostUpdateView),
+    path("post/<int:pk>/delete/", PostDeleteView, name=PostDeleteView),
+    path("post/new/", PostCreateView, name=PostCreateView),
 ]
