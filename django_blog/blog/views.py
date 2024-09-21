@@ -35,30 +35,30 @@ def profile(request):
 
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blog/post_create.html'
     model = Post
     success_url = '/'
     fields = ['title', 'content']
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     template_name = 'blog/post_list.html'
     models = Post
     queryset = Post.objects.all()
     templates_name = 'blog/post_list.html'
     
-class PostDetailView(DeleteView):
+class PostDetailView(LoginRequiredMixin, DeleteView):
     model = Post
     context_object_name = 'post'
     template_name = 'blog/post_detail.html'
     
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'blog/post_update.html'
     model = Post
     success_url = '/'
     
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'blog/post_delete.html'
     model = Post
     success_url = '/'
