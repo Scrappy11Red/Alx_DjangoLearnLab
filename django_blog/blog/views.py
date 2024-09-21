@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, PostForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 
@@ -23,6 +24,7 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'blog/register.html', {'form': form})
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         user = request.user
