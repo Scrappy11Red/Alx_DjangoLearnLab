@@ -10,6 +10,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
+from django.db.models import Q
 
 # Create your views here.
 
@@ -85,3 +86,13 @@ class CommentUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
 class CommentDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     model = Comment
     template_name = 'blog/comment_form.html'
+
+
+def search_post(request):
+    query = request.GET.get('q')
+    result = Post.objects.filter(
+        Q(title__icontains=query), 
+        Q(content__icontains=query),
+        Q(published_date__icontains=query),
+        Q(tags__name__icontains)
+    ).distinct()
