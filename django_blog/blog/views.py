@@ -1,13 +1,15 @@
 from typing import Any
+from django.forms import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import UserRegisterForm, PostForm
+from .forms import UserRegisterForm
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
 
 # Create your views here.
 
@@ -63,3 +65,23 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/'
 
+
+#Comment CRUD Section
+class CommentCreateView(CreateView, LoginRequiredMixin):
+    model = Comment
+    template_name = 'blog/comment_form.html'
+    fields = ['content']
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post_id = self.kwargs('pk')
+        return super().form_valid(form)
+    
+class CommentUpdateView(UpdateView, LoginRequiredMixin, UserPassesTestMixin):
+    model = Comment
+    template_name = 'blog/comment_form.html'
+    fields = ['content']
+
+class CommentDeleteView(DeleteView, LoginRequiredMixin, UserPassesTestMixin):
+    model = Comment
+    template_name = 'blog/comment_form.html'

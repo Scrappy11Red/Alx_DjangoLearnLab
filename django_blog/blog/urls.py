@@ -1,9 +1,8 @@
-from django.urls import path, include
-from .views import register, update_user_profile, login, profile, PostCreateView, PostDeleteView, PostDetailView, PostListView, PostUpdateView
+from django.urls import path
+from .views import register,  login, profile, PostCreateView, PostDeleteView, PostDetailView, PostListView, PostUpdateView, CommentCreateView, CommentDeleteView, CommentUpdateView
 
 urlpatterns = [
     path("register/", register, name=register),
-    path("update/", update_user_profile, name=update_user_profile),
     path("login/", login, name=login),
     path("profile/", profile, name=profile),
     path("", PostListView, name=PostListView),
@@ -11,4 +10,7 @@ urlpatterns = [
     path("post/<int:pk>/update/", PostUpdateView, name=PostUpdateView),
     path("post/<int:pk>/delete/", PostDeleteView, name=PostDeleteView),
     path("post/new/", PostCreateView, name=PostCreateView),
+    path("comment/new", CommentCreateView, name=CommentCreateView),
+    path("comment/<int:pk>/delete/", CommentDeleteView, name=CommentDeleteView),
+    path("comment/<int:pk>/update/", CommentUpdateView, name=CommentUpdateView),
 ]
