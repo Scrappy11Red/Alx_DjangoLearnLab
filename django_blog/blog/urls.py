@@ -11,6 +11,6 @@ urlpatterns = [
     path("post/<int:pk>/delete/", PostDeleteView, name=PostDeleteView),
     path("post/new/", PostCreateView, name=PostCreateView),
     path("post/<int:pk>/comments/new/", CommentCreateView, name=CommentCreateView),
-    path("post/<int:pk>/comments/delete/", CommentDeleteView, name=CommentDeleteView),
-    path("post/<int:pk>/comments/update/", CommentUpdateView, name=CommentUpdateView),
+    path("comment/<int:pk>/delete/", CommentDeleteView, name=CommentDeleteView),
+    path("comment/<int:pk>/update/", CommentUpdateView, name=CommentUpdateView),
 ]
